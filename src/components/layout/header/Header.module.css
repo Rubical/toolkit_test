@@ -1,0 +1,52 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px 50px;
+    background-color: lightgray;
+    box-shadow: inset 1px 1px 4px rgba(68, 68, 68, 0.58), inset 0px -1px 2px rgba(68, 68, 68, 0.58)
+}
+
+
+.navButton {
+    font-size: 17px;
+    font-weight: 600;
+    transition: all 0.1s ease-in-out;
+}
+
+.navButton:hover {
+    opacity: 0.7;
+}
+
+.navButton:active {
+    transform: scale(1.1);
+}
+
+.searchInputContainer {
+    width: 60%;
+    max-width: 235px;
+    padding: 9px 14px;
+    box-shadow: inset 1px 1px 4px rgba(68, 68, 68, 0.58), inset 0px -1px 2px rgba(68, 68, 68, 0.58);
+    border-radius: 5px;
+}
+
+.searchInput {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.searchIcon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.1s ease-in-out;
+}
+
+.searchIcon:hover {
+    opacity: 0.7;
+}
+
+.searchIcon:active {
+    transform: scale(1.2);
+}

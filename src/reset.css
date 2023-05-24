@@ -1,4 +1,15 @@
 /* Reset and base styles  */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+
+html {
+	overflow-y: scroll;
+	min-height: 100vh;
+	font-family: 'Montserrat', sans-serif;
+	background: rgba(211, 211, 211, 0.39);
+}
+
 * {
 	padding: 0px;
 	margin: 0px;
