@@ -1,0 +1,32 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    column-gap: 7px;
+    margin-bottom: 30px;
+}
+
+.pageButton {
+    width: 25px;
+    padding: 5px 7px;
+    font-size: 14px;
+    background-color: #b6b6b6;
+    border-radius: 5px;
+    box-shadow: inset 1px 1px 4px rgba(68, 68, 68, 0.58), inset 0px -1px 2px rgba(68, 68, 68, 0.58);
+
+}
+
+.activePageButton {
+    background-color: rgba(82, 82, 82, 0.62);
+
+}
+
+.vector {
+    width: 20px;
+    heigth: 20px
+}
+
+.vectorDisabled {
+    width: 20px;
+    heigth: 20px;
+    opacity: 0.5
+}

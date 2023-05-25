@@ -8,8 +8,12 @@ import { useAuthentication } from "../../../hooks/useAuthentication";
 
 const Header: FC = () => {
   const [value, setValue] = useState("");
-  const { fetchUserRepositories, changeAuthentication, changeAccessToken } =
-    useActions();
+  const {
+    fetchUserRepositories,
+    clearData,
+    changeAuthentication,
+    changeAccessToken,
+  } = useActions();
   const { access_token } = useAuthentication();
 
   supabase.auth.onAuthStateChange((event) => {
@@ -24,6 +28,7 @@ const Header: FC = () => {
 
   supabase.auth.onAuthStateChange((event) => {
     if (event == "SIGNED_OUT") {
+      clearData();
       changeAuthentication(false);
       changeAccessToken("");
     }

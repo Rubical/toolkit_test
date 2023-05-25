@@ -7,19 +7,32 @@ interface IState {
   totalCount: number;
   pageInfo: TypePageInfo | "";
   loading: boolean;
+  page: number;
+  pageItemsLimit: number;
 }
 
 const initialState: IState = {
   repositories: [],
-  totalCount: 0,
   pageInfo: "",
   loading: false,
+  totalCount: 0,
+  page: 1,
+  pageItemsLimit: 1,
 };
 
 export const repositoriesSlice = createSlice({
   name: "repositories",
   initialState,
-  reducers: {},
+  reducers: {
+    clearData: (state) => {
+      state.repositories = [];
+      state.totalCount = 0;
+      state.pageInfo = "";
+    },
+    changePage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserRepositories.pending, (state) => {
@@ -29,6 +42,8 @@ export const repositoriesSlice = createSlice({
         fetchUserRepositories.fulfilled,
         (state, action: PayloadAction<IUserRepositories>) => {
           state.repositories = action.payload.nodes;
+          state.totalCount = action.payload.totalCount;
+          state.pageInfo = action.payload.pageInfo;
           state.loading = false;
         }
       )

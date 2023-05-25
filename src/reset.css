@@ -4,7 +4,6 @@
 
 
 html {
-	overflow-y: scroll;
 	min-height: 100vh;
 	font-family: 'Montserrat', sans-serif;
 	background: rgba(211, 211, 211, 0.39);

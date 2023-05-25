@@ -23,6 +23,5 @@ export const fetchUserRepositories = createAsyncThunk<
     console.log("Server error!");
   }
   const data = await response.json();
-  console.log(data.data.viewer.repositories);
   return data.data.viewer.repositories;
 });

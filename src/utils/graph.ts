@@ -2,7 +2,7 @@ export const currentUserRepo = `{
   viewer {
     repositories(
       affiliations: [OWNER, COLLABORATOR, ORGANIZATION_MEMBER]
-      first: 10
+      first: 100
     ) {
       totalCount
       nodes {
