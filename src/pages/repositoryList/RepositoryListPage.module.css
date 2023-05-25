@@ -1,6 +1,10 @@
+.section {
+    min-height: 90vh;
+
+}
+
 .container {
-    min-height: calc(100vh - 219px);
-    padding: 50px 30px;
+    padding: 50px 100px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

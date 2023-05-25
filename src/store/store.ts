@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import repositoriesReducer from "./repositories.slice";
+import repositoryListReducer from "./repositoryList.slice";
 import authenticationReducer from "./authentication.slice";
+import currentRepositoryReducer from "./currentRepository.slice";
 
 const rootReducer = combineReducers({
-  repositories: repositoriesReducer,
+  repositoryList: repositoryListReducer,
   authentication: authenticationReducer,
+  currentRepository: currentRepositoryReducer,
 });
 
 export const store = configureStore({

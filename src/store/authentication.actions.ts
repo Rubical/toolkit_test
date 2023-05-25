@@ -7,7 +7,7 @@ export const gitHubLogIn = createAsyncThunk(
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "http://localhost:5173/",
+        redirectTo: "http://localhost:5173/toolkit_test",
         scopes: "repo user project",
       },
     });

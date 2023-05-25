@@ -1,7 +1,7 @@
 import { FC } from "react";
 import style from "./Pagination.module.css";
 import { useActions } from "../../../hooks/useActions";
-import { useRepositories } from "../../../hooks/useRepositories";
+import { useRepositoryList } from "../../../hooks/useRepositoryList";
 import vectorRight from "./../../../assets/icons/vector-right.svg";
 import vectorLeft from "./../../../assets/icons/vector-left.svg";
 
@@ -12,7 +12,7 @@ interface IPagination {
 
 const Pagination: FC<IPagination> = ({ totalItems, pageItemsLimit }) => {
   const totalPages: number = Math.ceil(totalItems / pageItemsLimit);
-  const { page } = useRepositories();
+  const { page } = useRepositoryList();
   const { changePage } = useActions();
   const arrOfPages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const lastPage = arrOfPages[arrOfPages.length - 1];

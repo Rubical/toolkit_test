@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { currentUserRepo } from "../utils/graph";
+import { getDetailedRepoCard } from "../utils/graph";
 import { RootState } from "./store";
-import { IUserRepositories } from "../types/types";
+import { ICurrentRepo } from "../types/types";
 
-export const fetchUserRepositories = createAsyncThunk<
-  IUserRepositories,
+export const fetchCurrentRepo = createAsyncThunk<
+  ICurrentRepo,
   void,
   { state: RootState }
->("repositories/fetchUserRepositories", async (__, thunkAPI) => {
-  const query = currentUserRepo;
-  const { authentication } = thunkAPI.getState();
+>("currentRepo/fetchCurrentRepo", async (__, thunkAPI) => {
+  const { authentication, currentRepository } = thunkAPI.getState();
+  const query = getDetailedRepoCard(currentRepository.repoName);
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
@@ -23,5 +23,6 @@ export const fetchUserRepositories = createAsyncThunk<
     console.log("Server error!");
   }
   const data = await response.json();
-  return data.data.viewer.repositories;
+  console.log(data.data.viewer.repository);
+  return data.data.viewer.repository;
 });

@@ -1,17 +1,27 @@
 export interface IUserRepositories {
-  nodes: TypeNode;
-  pageInfo: TypePageInfo;
+  nodes: INode[];
   totalCount: number;
 }
 
-export type TypeNode = {
+export interface INode {
   name: string;
   updatedAt: string;
   url: string;
   stargazers: { totalCount: number };
+}
+
+export interface ICurrentRepo extends INode {
+  description: string;
+  languages: { nodes: TypeLanguage[] };
+  collaborators: { nodes: TypeCollaborators[] };
+}
+
+type TypeLanguage = {
+  name: string;
 };
 
-export type TypePageInfo = {
-  endCursor: string;
-  hasNextPage: boolean;
+type TypeCollaborators = {
+  avatarUrl?: string;
+  name: string;
+  url: string;
 };

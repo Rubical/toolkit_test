@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserRepositories } from "./repositories.actions";
-import { IUserRepositories, TypeNode, TypePageInfo } from "../types/types";
+import { fetchUserRepositories } from "./repositoryList.actions";
+import { IUserRepositories, TypeNode } from "../types/types";
 
 interface IState {
   repositories: TypeNode[];
   totalCount: number;
-  pageInfo: TypePageInfo | "";
   loading: boolean;
   page: number;
   pageItemsLimit: number;
@@ -13,21 +12,19 @@ interface IState {
 
 const initialState: IState = {
   repositories: [],
-  pageInfo: "",
   loading: false,
   totalCount: 0,
   page: 1,
-  pageItemsLimit: 1,
+  pageItemsLimit: 3,
 };
 
-export const repositoriesSlice = createSlice({
+export const repositoryListSlice = createSlice({
   name: "repositories",
   initialState,
   reducers: {
     clearData: (state) => {
       state.repositories = [];
       state.totalCount = 0;
-      state.pageInfo = "";
     },
     changePage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
@@ -43,7 +40,6 @@ export const repositoriesSlice = createSlice({
         (state, action: PayloadAction<IUserRepositories>) => {
           state.repositories = action.payload.nodes;
           state.totalCount = action.payload.totalCount;
-          state.pageInfo = action.payload.pageInfo;
           state.loading = false;
         }
       )
@@ -53,4 +49,4 @@ export const repositoriesSlice = createSlice({
   },
 });
 
-export default repositoriesSlice.reducer;
+export default repositoryListSlice.reducer;

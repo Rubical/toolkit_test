@@ -13,10 +13,34 @@ export const currentUserRepo = `{
           totalCount
         }
       }
-      pageInfo {
-        endCursor
-        hasNextPage
+    }
+  }
+}`;
+
+export const getDetailedRepoCard = (repoName: string): string => {
+  return `{
+  viewer {
+    repository(name: "${repoName}") {
+      name
+      url
+      updatedAt
+      description
+      languages(first: 10) {
+        nodes {
+          name
+        }
+      }
+      collaborators(first: 10) {
+        nodes {
+          avatarUrl
+          name
+          url
+        }
+      }
+      stargazers {
+        totalCount
       }
     }
   }
 }`;
+};

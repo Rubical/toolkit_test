@@ -1,0 +1,86 @@
+.section {
+    min-height: 90vh;
+
+}
+
+.container {
+    display: flex;
+    padding: 50px 100px;
+}
+
+.repoOwner {
+    display: flex;
+    flex-direction: column;
+    float: right;
+    margin-right: 80px;
+}
+
+.repoOwnerName {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.repoOwnerLink {
+    color: rgba(30, 36, 159, 0.84);
+    font-weight: 500;
+}
+
+.repoOwnerLink:visited {
+    color: #3b3844;
+}
+
+.repoOwnerImg {
+    width: 400px;
+    height: 400px;
+}
+
+.repoInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    row-gap: 10px;
+    margin-top: 40px;
+    font-weight: 500;
+}
+
+.repoName {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: start;
+    text-decoration: underline;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.languagesWrapper {
+    display: flex;
+    column-gap: 15px;
+    margin-top: 20px;
+}
+
+
+.starsCount {
+    font-size: 18px;
+    font-weight: 500;
+    padding-top: 7px;
+    color: gray;
+    margin-right: 5px;
+}
+
+.starIcon {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 20px;
+}
+
+.url {
+    color: rgba(30, 36, 159, 0.84);
+    font-weight: 500;
+    word-wrap: anywhere;
+}
+
+.url:visited {
+    color: #3b3844;
+
+}

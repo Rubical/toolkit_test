@@ -1,12 +1,15 @@
 import { FC } from "react";
 import Layout from "./components/layout/Layout";
-import RepositoriesPage from "./pages/repositories/RepositoriesPage";
+import AppRouter from "./router/AppRouter";
+import { BrowserRouter } from "react-router-dom";
 
 const App: FC = () => {
   return (
-    <Layout>
-      <RepositoriesPage />
-    </Layout>
+    <BrowserRouter>
+      <Layout>
+        <AppRouter />
+      </Layout>
+    </BrowserRouter>
   );
 };
 

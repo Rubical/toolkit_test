@@ -1,48 +1,25 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import style from "./Header.module.css";
 import searchIcon from "./../../../assets/icons/search-icon.svg";
 import { useActions } from "../../../hooks/useActions";
 import GitHubBtnOAuthBtn from "../../GitHubOAuthBtn/GitHubBtnOAuthBtn";
-import { supabase } from "../../../supabase/client";
-import { useAuthentication } from "../../../hooks/useAuthentication";
+import { useNavigate } from "react-router-dom";
 
 const Header: FC = () => {
   const [value, setValue] = useState("");
-  const {
-    fetchUserRepositories,
-    clearData,
-    changeAuthentication,
-    changeAccessToken,
-  } = useActions();
-  const { access_token } = useAuthentication();
-
-  supabase.auth.onAuthStateChange((event) => {
-    if (event == "SIGNED_IN") {
-      changeAuthentication(true);
-      changeAccessToken(
-        JSON.parse(localStorage.getItem("sb-blxlglcobnyhuhmfdsee-auth-token")!)
-          ?.provider_token
-      );
-    }
-  });
-
-  supabase.auth.onAuthStateChange((event) => {
-    if (event == "SIGNED_OUT") {
-      clearData();
-      changeAuthentication(false);
-      changeAccessToken("");
-    }
-  });
-
-  useEffect(() => {
-    if (access_token) fetchUserRepositories();
-  }, [access_token]);
+  const { fetchUserRepositories } = useActions();
+  const navigate = useNavigate();
 
   return (
     <header>
       <div className={style.container}>
         <div>
-          <button className={style.navButton}>Главная</button>
+          <button
+            onClick={() => navigate("/toolkit_test")}
+            className={style.navButton}
+          >
+            Главная
+          </button>
         </div>
         <div className={style.searchInputContainer}>
           <input

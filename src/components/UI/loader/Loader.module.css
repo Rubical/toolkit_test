@@ -1,0 +1,20 @@
+.container {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    margin-top: 200px;
+}
+
+.loader {
+    border: 7px solid #c7c7c7;
+    border-top: 7px solid #565656;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

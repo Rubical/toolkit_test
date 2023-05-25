@@ -6,7 +6,8 @@
 }
 
 .pageButton {
-    width: 25px;
+    width: 30px;
+    height: 30px;
     padding: 5px 7px;
     font-size: 14px;
     background-color: #b6b6b6;
@@ -21,12 +22,12 @@
 }
 
 .vector {
-    width: 20px;
-    heigth: 20px
+    width: 25px;
+    heigth: 25px
 }
 
 .vectorDisabled {
-    width: 20px;
-    heigth: 20px;
+    width: 25px;
+    heigth: 25px;
     opacity: 0.5
 }
