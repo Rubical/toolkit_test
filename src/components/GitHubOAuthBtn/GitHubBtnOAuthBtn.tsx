@@ -6,12 +6,21 @@ import { useAuthentication } from "../../hooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
 
 const GitHubBtnOAuthBtn: FC = () => {
-  const { gitHubLogIn, gitHubLogOut } = useActions();
+  const {
+    gitHubLogIn,
+    gitHubLogOut,
+    clearRepositoryListData,
+    changeAuthentication,
+    changeAccessToken,
+  } = useActions();
   const { isAuthenticated, access_token } = useAuthentication();
   const navigate = useNavigate();
 
   const logOut = () => {
     gitHubLogOut();
+    clearRepositoryListData();
+    changeAuthentication(false);
+    changeAccessToken("");
     navigate("/toolkit_test");
   };
 

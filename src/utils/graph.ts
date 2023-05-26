@@ -7,6 +7,7 @@ export const currentUserRepo = `{
       totalCount
       nodes {
         name
+        id
         url
         updatedAt
         stargazers {
@@ -17,10 +18,10 @@ export const currentUserRepo = `{
   }
 }`;
 
-export const getDetailedRepoCard = (repoName: string): string => {
+export const getDetailedRepoCard = (repoId: string): string => {
   return `{
-  viewer {
-    repository(name: "${repoName}") {
+  node(id: "${repoId}") {
+    ... on Repository {
       name
       url
       updatedAt
@@ -30,17 +31,36 @@ export const getDetailedRepoCard = (repoName: string): string => {
           name
         }
       }
-      collaborators(first: 10) {
+      stargazers {
+        totalCount
+      }
+      collaborators {
         nodes {
           avatarUrl
           name
           url
         }
       }
-      stargazers {
-        totalCount
+    }
+  }
+}`;
+};
+
+export const getSearchedRepo = (repoName: string): string => {
+  return `{
+  search(query: "${repoName}", type: REPOSITORY, first: 100) {
+    nodes {
+      ... on Repository {
+        id
+        name
+        stargazers {
+            totalCount
+          }
+        url
+        updatedAt
       }
     }
+    repositoryCount
   }
 }`;
 };

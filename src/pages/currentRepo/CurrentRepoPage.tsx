@@ -3,22 +3,22 @@ import { useCurrentRepository } from "../../hooks/useCurrentRepository";
 import { useActions } from "../../hooks/useActions";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { useParams } from "react-router-dom";
-import style from "./CurrentRepository.module.css";
+import style from "./CurrentRepoPage.module.css";
 import Loader from "../../components/UI/loader/Loader";
 import starIcon from "../../assets/icons/star-icon.svg";
 import getPrettyDate from "../../utils/getPrettyDate";
-import emptyAvatar from "./../../assets/empty-avatar.jpg";
+import blankUser from "./../../assets/blank-user.svg";
 
-const CurrentRepository: FC = () => {
-  const { fetchCurrentRepo, changeCurrentRepoName } = useActions();
+const CurrentRepoPage: FC = () => {
+  const { fetchCurrentRepo, changeCurrentRepoId } = useActions();
   const { repoInfo, loading } = useCurrentRepository();
   const { access_token } = useAuthentication();
   const { urlRepoName } = useParams();
 
   useEffect(() => {
-    changeCurrentRepoName(urlRepoName!);
+    changeCurrentRepoId(urlRepoName!);
     if (access_token) fetchCurrentRepo();
-    console.log(repoInfo);
+    window.scroll(0, 0);
   }, [access_token]);
 
   return loading ? (
@@ -27,22 +27,22 @@ const CurrentRepository: FC = () => {
     <section className={style.section}>
       <div className={style.container}>
         <div className={style.repoOwner}>
-          <span className={style.repoOwnerName}>
-            Repository owner-
+          {repoInfo.collaborators ? (
             <a
               className={style.repoOwnerLink}
               href={repoInfo.collaborators.nodes[0].url}
             >
               {repoInfo.collaborators.nodes[0].name}
             </a>
-          </span>
-
+          ) : (
+            <p className={style.repoOwnerName}>Владелец не указан</p>
+          )}
           <img
             className={style.repoOwnerImg}
             src={
-              repoInfo.collaborators.nodes[0].avatarUrl
+              repoInfo.collaborators
                 ? repoInfo.collaborators.nodes[0].avatarUrl
-                : emptyAvatar
+                : blankUser
             }
             alt="repo-owner"
           />
@@ -62,12 +62,21 @@ const CurrentRepository: FC = () => {
             {getPrettyDate(new Date(repoInfo!.updatedAt))} - дата последнего
             коммита
           </div>
-          <div className={style.languagesWrapper}>
-            Использованные языки -
-            {repoInfo.languages.nodes.map((el) => (
-              <div className={style.languages}>{el.name}</div>
-            ))}
-          </div>
+          {repoInfo.languages.nodes.length ? (
+            <div className={style.languagesWrapper}>
+              Использованные языки:
+              <div className={style.languagesRow}>
+                {repoInfo.languages.nodes.map((el) => (
+                  <div className={style.languages} key={el.name}>
+                    {el.name}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+
           <a href={repoInfo!.url} className={style.url}>
             {repoInfo!.url}
           </a>
@@ -79,4 +88,4 @@ const CurrentRepository: FC = () => {
   );
 };
 
-export default CurrentRepository;
+export default CurrentRepoPage;

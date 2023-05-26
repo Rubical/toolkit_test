@@ -12,13 +12,13 @@ interface IRepositoryCard {
 
 const RepositoryCard: FC<IRepositoryCard> = ({ repo }) => {
   const navigate = useNavigate();
-  const { changeCurrentRepoName } = useActions();
+  const { changeCurrentRepoId } = useActions();
   return (
     <div className={style.card}>
       <button
         onClick={() => {
-          changeCurrentRepoName(repo.name);
-          navigate(`./repository/${repo.name}`);
+          changeCurrentRepoId(repo.id);
+          navigate(`../toolkit_test/repository/${repo.id}`);
         }}
         className={style.name}
       >

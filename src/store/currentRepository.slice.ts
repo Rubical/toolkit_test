@@ -3,14 +3,14 @@ import { ICurrentRepo } from "../types/types";
 import { fetchCurrentRepo } from "./currentRepository.actions";
 
 interface IState {
-  repoName: string;
+  id: string;
   loading: boolean;
   repoInfo: ICurrentRepo | null;
 }
 
 const initialState: IState = {
-  repoName: "",
-  loading: false,
+  id: "",
+  loading: true,
   repoInfo: null,
 };
 
@@ -18,8 +18,8 @@ export const currentRepositorySlice = createSlice({
   name: "currentRepo",
   initialState,
   reducers: {
-    changeCurrentRepoName: (state, action: PayloadAction<string>) => {
-      state.repoName = action.payload;
+    changeCurrentRepoId: (state, action: PayloadAction<string>) => {
+      state.id = action.payload;
     },
   },
   extraReducers: (builder) => {

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserRepositories } from "./repositoryList.actions";
-import { IUserRepositories, INode } from "../types/types";
+import { INode, TypeSearchedRepos } from "../types/types";
+import { fetchSearchedRepo } from "./searchedRepos.actions";
 
 interface IState {
   repositories: INode[];
@@ -18,35 +18,35 @@ const initialState: IState = {
   pageItemsLimit: 6,
 };
 
-export const repositoryListSlice = createSlice({
-  name: "repositories",
+export const searchedReposSlice = createSlice({
+  name: "searchedRepos",
   initialState,
   reducers: {
-    clearRepositoryListData: (state) => {
+    clearSearchedData: (state) => {
       state.repositories = [];
       state.totalCount = 0;
     },
-    changeRepositoryListPage: (state, action: PayloadAction<number>) => {
+    changeSearchedRepoPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserRepositories.pending, (state) => {
+      .addCase(fetchSearchedRepo.pending, (state) => {
         state.loading = true;
       })
       .addCase(
-        fetchUserRepositories.fulfilled,
-        (state, action: PayloadAction<IUserRepositories>) => {
+        fetchSearchedRepo.fulfilled,
+        (state, action: PayloadAction<TypeSearchedRepos>) => {
           state.repositories = action.payload.nodes;
-          state.totalCount = action.payload.totalCount;
+          state.totalCount = action.payload.repositoryCount;
           state.loading = false;
         }
       )
-      .addCase(fetchUserRepositories.rejected, (state) => {
+      .addCase(fetchSearchedRepo.rejected, (state) => {
         state.loading = false;
       });
   },
 });
 
-export default repositoryListSlice.reducer;
+export default searchedReposSlice.reducer;

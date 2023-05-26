@@ -1,23 +1,28 @@
 import { FC, useEffect } from "react";
 import { useRepositoryList } from "../../hooks/useRepositoryList";
 import RepositoryCard from "../../components/RepositoryCard/RepositoryCard";
-import style from "./RepositoryListPage.module.css";
+import style from "./userReposPage.module.css";
 import Pagination from "../../components/UI/pagination/Pagination";
 import Loader from "../../components/UI/loader/Loader";
 import { supabase } from "../../supabase/client";
 import { useActions } from "../../hooks/useActions";
 import { useAuthentication } from "../../hooks/useAuthentication";
+import SearchRepoInput from "../../components/UI/input/SearchRepoInput";
+import { useNavigate, useParams } from "react-router-dom";
 
-const RepositoryListPage: FC = () => {
+const UserReposPage: FC = () => {
   const {
     changeAuthentication,
     changeAccessToken,
-    clearData,
+    clearRepositoryListData,
     fetchUserRepositories,
+    changeRepositoryListPage,
   } = useActions();
   const { repositories, totalCount, page, pageItemsLimit, loading } =
     useRepositoryList();
   const { access_token } = useAuthentication();
+  const navigate = useNavigate();
+  const { userReposPage } = useParams();
   supabase.auth.onAuthStateChange((event) => {
     if (event == "SIGNED_IN") {
       changeAuthentication(true);
@@ -30,37 +35,55 @@ const RepositoryListPage: FC = () => {
 
   supabase.auth.onAuthStateChange((event) => {
     if (event == "SIGNED_OUT") {
-      clearData();
+      clearRepositoryListData();
       changeAuthentication(false);
       changeAccessToken("");
     }
   });
 
   useEffect(() => {
+    if (userReposPage) changeRepositoryListPage(Number(userReposPage));
+  });
+
+  useEffect(() => {
     if (access_token) fetchUserRepositories();
   }, [access_token]);
+
+  const changeUserReposPage = (page: number) => {
+    navigate(`../toolkit_test/${page}`);
+    changeRepositoryListPage(page);
+  };
+
   return loading ? (
     <Loader />
   ) : (
     <section className={style.section}>
+      <SearchRepoInput />
       <div className={style.container}>
-        {repositories.length ? (
+        {repositories.length && repositories.length > pageItemsLimit ? (
           repositories
             .slice(
               page * pageItemsLimit - pageItemsLimit,
               page * pageItemsLimit
             )
             .map((repo) => <RepositoryCard key={repo.name} repo={repo} />)
+        ) : repositories.length ? (
+          repositories.map((repo) => (
+            <RepositoryCard key={repo.name} repo={repo} />
+          ))
         ) : (
           <div className={style.alertText}>
-            Чтобы увидеть Ваши репозитории, пожалуйста, авторизуйтесь с помощью
-            GitHub или введите название любого публичного репозитория в
-            поисковую строку.
+            Для работы приложения, пожалуйста, авторизуйтесь с помощью GitHub.
           </div>
         )}
       </div>
       {repositories.length ? (
-        <Pagination totalItems={totalCount} pageItemsLimit={pageItemsLimit} />
+        <Pagination
+          totalItems={totalCount}
+          pageItemsLimit={pageItemsLimit}
+          changePage={changeUserReposPage}
+          page={page}
+        />
       ) : (
         ""
       )}
@@ -68,4 +91,4 @@ const RepositoryListPage: FC = () => {
   );
 };
 
-export default RepositoryListPage;
+export default UserReposPage;

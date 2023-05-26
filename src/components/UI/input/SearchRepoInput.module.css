@@ -1,0 +1,38 @@
+
+
+.searchInputContainer {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 14px;
+    box-shadow: inset 1px 1px 4px rgba(68, 68, 68, 0.58), inset 0px -1px 2px rgba(68, 68, 68, 0.58);
+    border-radius: 5px;
+    margin-top: 30px;
+}
+
+.searchInput {
+    width: calc(100% - 20px);
+    height: 25px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.searchIcon {
+    width: 20px;
+    height: 20px;
+    transition: all 0.1s ease-in-out;
+}
+
+.searchIcon:hover {
+    opacity: 0.7;
+}
+
+.searchIcon:active {
+    transform: scale(1.2);
+}
+
+@media (max-width: 600px) {
+    .searchInputContainer {
+        width: 90%;
+    }
+}

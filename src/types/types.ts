@@ -4,6 +4,7 @@ export interface IUserRepositories {
 }
 
 export interface INode {
+  id: string;
   name: string;
   updatedAt: string;
   url: string;
@@ -13,7 +14,7 @@ export interface INode {
 export interface ICurrentRepo extends INode {
   description: string;
   languages: { nodes: TypeLanguage[] };
-  collaborators: { nodes: TypeCollaborators[] };
+  collaborators?: { nodes: TypeCollaborators[] };
 }
 
 type TypeLanguage = {
@@ -25,3 +26,8 @@ type TypeCollaborators = {
   name: string;
   url: string;
 };
+
+export type TypeSearchedRepos = { repositoryCount: number } & Pick<
+  IUserRepositories,
+  "nodes"
+>;

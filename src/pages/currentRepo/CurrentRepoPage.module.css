@@ -11,28 +11,35 @@
 .repoOwner {
     display: flex;
     flex-direction: column;
-    float: right;
     margin-right: 80px;
+}
+
+.repoOwnerLink {
+    color: rgba(30, 36, 159, 0.84);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: opacity 0.1s ease-in-out;
+}
+
+.repoOwnerLink:hover {
+    opacity: 0.7
+}
+
+.repoOwnerLink:visited {
+    color: #3c19a4;
 }
 
 .repoOwnerName {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 20px;
-}
-
-.repoOwnerLink {
-    color: rgba(30, 36, 159, 0.84);
-    font-weight: 500;
-}
-
-.repoOwnerLink:visited {
-    color: #3b3844;
+    margin-left: 30px;
 }
 
 .repoOwnerImg {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
 }
 
 .repoInfo {
@@ -53,10 +60,10 @@
     transition: opacity 0.1s ease-in-out;
 }
 
-.languagesWrapper {
+
+.languagesRow {
     display: flex;
     column-gap: 15px;
-    margin-top: 20px;
 }
 
 
@@ -80,7 +87,40 @@
     word-wrap: anywhere;
 }
 
-.url:visited {
-    color: #3b3844;
+.url:hover {
+    opacity: 0.7
+}
 
+.url:visited {
+    color: #3c19a4;
+
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 20px;
+    }
+
+    .repoOwner {
+        width: 100%;
+        margin-right: 0px;
+        align-items: center;
+
+    }
+
+    .repoOwnerImg {
+        width: 90%;
+        max-width: 300px;
+
+    }
+
+    .repoInfo {
+        align-items: center;
+    }
+
+    .repoName {
+        font-size: 25px;
+    }
 }

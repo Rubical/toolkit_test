@@ -9,7 +9,7 @@ export const fetchCurrentRepo = createAsyncThunk<
   { state: RootState }
 >("currentRepo/fetchCurrentRepo", async (__, thunkAPI) => {
   const { authentication, currentRepository } = thunkAPI.getState();
-  const query = getDetailedRepoCard(currentRepository.repoName);
+  const query = getDetailedRepoCard(currentRepository.id);
   const response = await fetch("https://api.github.com/graphql", {
     method: "POST",
     headers: {
@@ -23,6 +23,5 @@ export const fetchCurrentRepo = createAsyncThunk<
     console.log("Server error!");
   }
   const data = await response.json();
-  console.log(data.data.viewer.repository);
-  return data.data.viewer.repository;
+  return data.data.node;
 });
