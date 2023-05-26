@@ -7,7 +7,7 @@ export const gitHubLogIn = createAsyncThunk(
     await supabase.auth.signInWithOAuth({
       provider: "github",
       options: {
-        redirectTo: "http://localhost:5173/toolkit_test",
+        redirectTo: "https://rubical.github.io/toolkit_test/",
         scopes: "repo user project",
       },
     });

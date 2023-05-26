@@ -29,6 +29,9 @@ export const repositoryListSlice = createSlice({
     changeRepositoryListPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    stopLoading: (state) => {
+      state.loading = false;
+    },
   },
   extraReducers: (builder) => {
     builder

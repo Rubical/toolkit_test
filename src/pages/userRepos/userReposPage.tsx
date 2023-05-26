@@ -17,6 +17,7 @@ const UserReposPage: FC = () => {
     clearRepositoryListData,
     fetchUserRepositories,
     changeRepositoryListPage,
+    stopLoading,
   } = useActions();
   const { repositories, totalCount, page, pageItemsLimit, loading } =
     useRepositoryList();
@@ -42,8 +43,9 @@ const UserReposPage: FC = () => {
   });
 
   useEffect(() => {
+    if (!access_token) stopLoading();
     if (userReposPage) changeRepositoryListPage(Number(userReposPage));
-  });
+  }, []);
 
   useEffect(() => {
     if (access_token) fetchUserRepositories();
