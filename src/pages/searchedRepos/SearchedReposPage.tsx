@@ -1,19 +1,21 @@
 import { FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useActions } from "../../hooks/useActions";
+import { useSearchedRepos } from "../../hooks/useSearchedRepos";
 import style from "./SearchedRepos.module.css";
 import Loader from "../../components/UI/loader/Loader";
 import RepositoryCard from "../../components/RepositoryCard/RepositoryCard";
 import Pagination from "../../components/UI/pagination/Pagination";
-import { useSearchedRepos } from "../../hooks/useSearchedRepos";
 import SearchRepoInput from "../../components/UI/input/SearchRepoInput";
 
 const SearchedReposPage: FC = () => {
-  const { fetchSearchedRepo, changeSearchedRepoPage } = useActions();
-  const { loading, repositories, page, pageItemsLimit, totalCount } =
-    useSearchedRepos();
   const navigate = useNavigate();
   const { searchedReposPage, searchedRepoName } = useParams();
+
+  const { fetchSearchedRepo, changeSearchedRepoPage } = useActions();
+
+  const { loading, repositories, page, pageItemsLimit, totalCount } =
+    useSearchedRepos();
 
   useMemo(() => fetchSearchedRepo(searchedRepoName!), [searchedRepoName]);
 

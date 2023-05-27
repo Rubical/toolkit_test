@@ -1,15 +1,18 @@
 import React, { FC, useState } from "react";
-import style from "../../UI/input/SearchRepoInput.module.css";
-import searchIcon from "../../../assets/icons/search-icon.svg";
 import { useActions } from "../../../hooks/useActions";
 import { useAuthentication } from "../../../hooks/useAuthentication";
 import { useNavigate } from "react-router-dom";
+import style from "../../UI/input/SearchRepoInput.module.css";
+import searchIcon from "../../../assets/icons/search-icon.svg";
 
 const SearchRepoInput: FC = () => {
-  const [value, setValue] = useState("");
-  const { fetchSearchedRepo, changeSearchedRepoPage } = useActions();
-  const { access_token } = useAuthentication();
   const navigate = useNavigate();
+
+  const [value, setValue] = useState("");
+
+  const { fetchSearchedRepo, changeSearchedRepoPage } = useActions();
+
+  const { access_token } = useAuthentication();
 
   const searchRepo = () => {
     if (value.length && access_token) {
@@ -42,7 +45,7 @@ const SearchRepoInput: FC = () => {
         onKeyDown={(event) => handleKeyDown(event)}
         className={style.searchInput}
         type="text"
-        placeholder="Введите название"
+        placeholder="Введите название любого публичного репозитория"
       />
       <button
         onClick={() => {

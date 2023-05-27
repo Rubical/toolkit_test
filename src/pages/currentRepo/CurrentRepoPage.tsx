@@ -4,19 +4,22 @@ import { useActions } from "../../hooks/useActions";
 import { useAuthentication } from "../../hooks/useAuthentication";
 import { useParams } from "react-router-dom";
 import style from "./CurrentRepoPage.module.css";
-import Loader from "../../components/UI/loader/Loader";
 import starIcon from "../../assets/icons/star-icon.svg";
-import getPrettyDate from "../../utils/getPrettyDate";
 import blankUser from "./../../assets/blank-user.svg";
+import getPrettyDate from "../../utils/getPrettyDate";
+import Loader from "../../components/UI/loader/Loader";
 
 const CurrentRepoPage: FC = () => {
-  const { fetchCurrentRepo, changeCurrentRepoId } = useActions();
-  const { repoInfo, loading } = useCurrentRepository();
-  const { access_token } = useAuthentication();
   const { urlRepoName } = useParams();
 
+  const { fetchCurrentRepo, changeCurrentRepoId } = useActions();
+
+  const { access_token } = useAuthentication();
+
+  const { repoInfo, loading } = useCurrentRepository();
+
   useEffect(() => {
-    changeCurrentRepoId(urlRepoName!);
+    if (urlRepoName) changeCurrentRepoId(urlRepoName);
     if (access_token) fetchCurrentRepo();
     window.scroll(0, 0);
   }, [access_token]);

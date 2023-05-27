@@ -22,9 +22,13 @@ const Pagination: FC<IPagination> = ({
       : Math.ceil(totalItems / pageItemsLimit);
   const arrOfPages = Array.from({ length: totalPages }, (_, i) => i + 1);
   const lastPage = arrOfPages[arrOfPages.length - 1];
+
   const pagesToShow =
-    arrOfPages.length > 10
-      ? page === 1 || page === 2 || page === lastPage
+    arrOfPages.length > 6
+      ? page === 1 ||
+        page === 2 ||
+        page === lastPage ||
+        page === arrOfPages[arrOfPages.length - 2]
         ? [
             ...arrOfPages.slice(0, 3),
             "divider",
@@ -41,12 +45,6 @@ const Pagination: FC<IPagination> = ({
             ...arrOfPages.slice(0, 2),
             "divider",
             ...arrOfPages.slice(arrOfPages.length - 4, arrOfPages.length),
-          ]
-        : page === arrOfPages[arrOfPages.length - 2]
-        ? [
-            ...arrOfPages.slice(0, 3),
-            "divider",
-            ...arrOfPages.slice(arrOfPages.length - 3, arrOfPages.length),
           ]
         : [
             ...arrOfPages.slice(0, 1),
@@ -67,6 +65,7 @@ const Pagination: FC<IPagination> = ({
         <img
           className={page === 1 ? style.vectorDisabled : style.vector}
           src={vectorLeft}
+          alt="vector-left"
         />
       </button>
       {pagesToShow.map((el) =>
@@ -98,6 +97,7 @@ const Pagination: FC<IPagination> = ({
         <img
           className={page === lastPage ? style.vectorDisabled : style.vector}
           src={vectorRight}
+          alt="vector-right"
         />
       </button>
     </div>

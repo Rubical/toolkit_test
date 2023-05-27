@@ -1,11 +1,12 @@
 import { FC } from "react";
-import style from "./Header.module.css";
-import GitHubBtnOAuthBtn from "../../GitHubOAuthBtn/GitHubBtnOAuthBtn";
 import { useNavigate } from "react-router-dom";
 import { useActions } from "../../../hooks/useActions";
+import style from "./Header.module.css";
+import GitHubBtnOAuthBtn from "../../GitHubOAuthBtn/GitHubBtnOAuthBtn";
 
 const Header: FC = () => {
   const navigate = useNavigate();
+
   const { changeRepositoryListPage, changeSearchedRepoPage } = useActions();
 
   return (

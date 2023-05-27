@@ -1,7 +1,7 @@
 import { FC } from "react";
-import Layout from "./components/layout/Layout";
-import AppRouter from "./router/AppRouter";
 import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+import Layout from "./components/layout/Layout";
 
 const App: FC = () => {
   return (

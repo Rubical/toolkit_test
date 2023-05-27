@@ -1,9 +1,9 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { useActions } from "../../hooks/useActions";
 import style from "./RepositoryCard.module.css";
 import starIcon from "./../../assets/icons/star-icon.svg";
 import getPrettyDate from "../../utils/getPrettyDate";
-import { useNavigate } from "react-router-dom";
-import { useActions } from "../../hooks/useActions";
 import { INode } from "../../types/types";
 
 interface IRepositoryCard {
@@ -12,7 +12,9 @@ interface IRepositoryCard {
 
 const RepositoryCard: FC<IRepositoryCard> = ({ repo }) => {
   const navigate = useNavigate();
+
   const { changeCurrentRepoId } = useActions();
+
   return (
     <div className={style.card}>
       <button

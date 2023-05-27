@@ -1,16 +1,19 @@
 import { FC, useEffect } from "react";
+import { supabase } from "../../supabase/client";
+import { useNavigate, useParams } from "react-router-dom";
+import { useActions } from "../../hooks/useActions";
+import { useAuthentication } from "../../hooks/useAuthentication";
 import { useRepositoryList } from "../../hooks/useRepositoryList";
-import RepositoryCard from "../../components/RepositoryCard/RepositoryCard";
 import style from "./userReposPage.module.css";
 import Pagination from "../../components/UI/pagination/Pagination";
 import Loader from "../../components/UI/loader/Loader";
-import { supabase } from "../../supabase/client";
-import { useActions } from "../../hooks/useActions";
-import { useAuthentication } from "../../hooks/useAuthentication";
+import RepositoryCard from "../../components/RepositoryCard/RepositoryCard";
 import SearchRepoInput from "../../components/UI/input/SearchRepoInput";
-import { useNavigate, useParams } from "react-router-dom";
 
 const UserReposPage: FC = () => {
+  const navigate = useNavigate();
+  const { userReposPage } = useParams();
+
   const {
     changeAuthentication,
     changeAccessToken,
@@ -19,11 +22,12 @@ const UserReposPage: FC = () => {
     changeRepositoryListPage,
     stopLoading,
   } = useActions();
+
   const { repositories, totalCount, page, pageItemsLimit, loading } =
     useRepositoryList();
+
   const { access_token } = useAuthentication();
-  const navigate = useNavigate();
-  const { userReposPage } = useParams();
+
   supabase.auth.onAuthStateChange((event) => {
     if (event == "SIGNED_IN") {
       changeAuthentication(true);
